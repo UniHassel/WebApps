@@ -8,8 +8,32 @@
         <title>Document</title>
     </head>
     <body>
+        <?php 
+            if ( isset($_GET['login'])&&isset($_GET['password']) ) {
+                $login = $_GET['login'];
+                $pass = $_GET['password'];
+                $host = "localhost";
+                $user = "root";
+                $xampp_pas = "";
+                $bd_name = "task1337";
+                
+                $sql_connect = new mysqli($host, $user, $xampp_pas, $bd_name);
+                //$sql = "INSERT INTO users (login, password) VALUES ('$login', '$pass')";
+                $sqllogin = "SELECT login FROM users WHERE login = $login";
+                $sqlpass = "SELECT password FROM users WHERE login = $login";
+                
+                $bdlogin = $sql_connect -> query($sqllogin);
+                $bdpass = $sql_connect -> query($sqlpass);
+                if($sql_connect -> connect_errno) { echo $sql_coonect -> error; }
+                
+                if ($bdlogin != "" && $bdpass=$pass) {
+                    echo "ok";
+                }
+                
+            }
+        ?>
         <header>
-
+            
         </header>
         <nav>
             <ol>
